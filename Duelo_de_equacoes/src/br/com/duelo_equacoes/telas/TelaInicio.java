@@ -20,7 +20,11 @@ public class TelaInicio extends javax.swing.JFrame {
      * Creates new form TelaInicio
      */
     
+    
     font f = new font();
+    TelaPlacar placar = new TelaPlacar();
+    TelaCadJogador  jogador = new TelaCadJogador();
+    TelaRegras regras = new TelaRegras();
     
     public TelaInicio() {
         initComponents();
@@ -41,9 +45,6 @@ public class TelaInicio extends javax.swing.JFrame {
         mouse.corMouse(btSom, corPadrao, corDestaque);
     }
 
-    TelaPlacar placar = new TelaPlacar();
-    TelaCadJogador  jogador = new TelaCadJogador();
-    TelaRegras regras = new TelaRegras();
     
     
     /**
@@ -108,6 +109,7 @@ public class TelaInicio extends javax.swing.JFrame {
         getContentPane().add(btPlacar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 297, 70));
 
         btSom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Som.png"))); // NOI18N
+        btSom.setToolTipText("Som");
         btSom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSom.setPreferredSize(new java.awt.Dimension(60, 60));
         getContentPane().add(btSom, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 648, -1, 64));

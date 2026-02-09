@@ -5,6 +5,11 @@
  */
 package br.com.duelo_equacoes.telas;
 
+import br.com.duelo_equacoes_classes.font;
+import br.com.duelo_equacoes_classes.mouse;
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author Julimar
@@ -14,8 +19,17 @@ public class TelaRegras extends javax.swing.JFrame {
     /**
      * Creates new form TelaRegras
      */
+    font f = new font();
+
     public TelaRegras() {
         initComponents();
+        Font fontePersonalizada = f.carregarFonte(50f);
+        lblRegras.setFont(fontePersonalizada);
+
+        Color corPadrao = new Color(0, 96, 57);
+        Color corDestaque = new Color(166, 137, 83);
+        
+        mouse.corMouse(btVolta, corPadrao, corDestaque);
     }
 
     /**
@@ -27,21 +41,167 @@ public class TelaRegras extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        lblRegras = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        btVolta = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Regras.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 48, -1, -1));
+
+        lblRegras.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegras.setText("REGRAS ");
+        getContentPane().add(lblRegras, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 48, -1, -1));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(0, 96, 57));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Prepare-se para o Duelo de Equações! \n\nVocê está pronto para colocar seu raciocínio à prova? \nO jogo foi criado para transformar o aprendizado \nde matemática em uma experiência interativa e desafiadora.\n\n3 Níveis de Dificuldade: Do iniciante ao mestre das contas.\n\nSuba no Ranking: Enfrente desafios, some pontos e mostre para\ntodos quem  é o número 1 no nosso placar global.\n\nAceita o desafio? Venha testar sua agilidade mental agora!");
+        jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(166, 137, 83)));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.addTab("Sobre o jogo ", jPanel1);
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setBackground(new java.awt.Color(204, 255, 204));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Nível Fácil: O Aquecimento \nOperações fundamentais (soma, subtração, multiplicação e \ndivisão) com números de 1 a 10. \nPerfeito para quem quer ganhar agilidade mental e \ndominar o básico!");
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jTextArea3.setEditable(false);
+        jTextArea3.setBackground(new java.awt.Color(255, 255, 204));
+        jTextArea3.setColumns(20);
+        jTextArea3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTextArea3.setRows(5);
+        jTextArea3.setText("Nível Médio: O Desafio Intermediário\nOperações de soma, subtração, multiplicação e divisão\nutilizando números entre 10 e 20. \nHora de mostrar que você tem foco.");
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jTextArea4.setEditable(false);
+        jTextArea4.setBackground(new java.awt.Color(255, 153, 153));
+        jTextArea4.setColumns(20);
+        jTextArea4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTextArea4.setRows(5);
+        jTextArea4.setText("Nível Difícil: O Mestre das Equações\nPrepare-se para enfrentar cálculos de potenciação com \nbase e expoentes entre 1 e 8. Apenas para os verdadeiros \ngênios da matemática!");
+        jScrollPane4.setViewportView(jTextArea4);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane4))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Sobre os níveis", jPanel2);
+
+        jTextArea5.setBackground(new java.awt.Color(0, 96, 57));
+        jTextArea5.setColumns(20);
+        jTextArea5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTextArea5.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea5.setRows(5);
+        jTextArea5.setText("Cada Nível, Um Pódio: Os rankings são separados por\ndificuldade (Fácil, Médio e Difícil). Seus recordes no \nnível Fácil não competem com os do nível Difícil.\n\nEscolha com Estratégia: Antes de começar, selecione bem \no seu desafio. Cada nível exige habilidades diferentes e possui \nsua própria tabela de líderes.\n\nDomine o Topo: Você pode tentar ser o número #1 em todas \nas categorias ou se especializar em apenas uma. \n\nA escolha é sua!");
+        jTextArea5.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(166, 137, 83)));
+        jScrollPane5.setViewportView(jTextArea5);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Sobre a ranking", jPanel3);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 144, -1, -1));
+
+        btVolta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Volta.png"))); // NOI18N
+        btVolta.setToolTipText("Voltar");
+        btVolta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btVolta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btVolta, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 626, 80, 80));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 490, 750));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVoltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltaActionPerformed
+        TelaInicio inicio = new TelaInicio();
+        inicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btVoltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +239,23 @@ public class TelaRegras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btVolta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JLabel lblRegras;
     // End of variables declaration//GEN-END:variables
 }
