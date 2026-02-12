@@ -5,6 +5,11 @@
  */
 package br.com.duelo_equacoes.telas;
 
+import br.com.duelo_equacoes_classes.font;
+import br.com.duelo_equacoes_classes.mouse;
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author Julimar
@@ -14,8 +19,18 @@ public class TelaCadJogador extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadJogador
      */
+    font f = new font();
+
     public TelaCadJogador() {
         initComponents();
+        Font fontePersonalizada = f.carregarFonte(30f);
+        lblTitulo.setFont(fontePersonalizada);
+
+        Color corPadrao = new Color(0, 96, 57);
+        Color corDestaque = new Color(166, 137, 83);
+
+        mouse.corMouse(btVoltar, corPadrao, corDestaque);
+        mouse.corMouse(btSalvar, corPadrao, corDestaque);
     }
 
     /**
@@ -27,21 +42,268 @@ public class TelaCadJogador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbGrupoAvatar = new javax.swing.ButtonGroup();
+        rbGrupoNivel = new javax.swing.ButtonGroup();
+        lblTitulo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txtNomeJogador = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        rbSamurai = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        rbGato = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        rbAlien = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        rbMonstro = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txtIdade = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cbEscolaridade = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        rbFacil = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        rbMedio = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        rbDificil = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        btVoltar = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setText("Cadastro do jogador");
+        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 32, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Jogador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 16))); // NOI18N
+
+        txtNomeJogador.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtNomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtNomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        pack();
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 410, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Avatar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 16))); // NOI18N
+
+        rbGrupoAvatar.add(rbSamurai);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/samurai.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rbGrupoAvatar.add(rbGato);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Gato.png"))); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rbGrupoAvatar.add(rbAlien);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Alien.png"))); // NOI18N
+        jLabel3.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rbGrupoAvatar.add(rbMonstro);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Monstro.png"))); // NOI18N
+        jLabel4.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbSamurai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbGato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rbAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rbMonstro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(rbSamurai))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(rbGato))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(rbMonstro))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(rbAlien)))))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 410, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 16))); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel5.setText("Idade:");
+
+        txtIdade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel6.setText("Escolaridade:");
+
+        cbEscolaridade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cbEscolaridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fundamental", "Médio", "Tecnico", "Graduado" }));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbEscolaridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 410, -1));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nível", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 16))); // NOI18N
+
+        rbGrupoNivel.add(rbFacil);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/facil.png"))); // NOI18N
+        jLabel8.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rbGrupoNivel.add(rbMedio);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Medio.png"))); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rbGrupoNivel.add(rbDificil);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/dificil.png"))); // NOI18N
+        jLabel9.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbFacil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rbMedio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(rbDificil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(rbMedio))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbFacil)
+                            .addComponent(rbDificil))))
+                .addGap(15, 15, 15))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 410, -1));
+
+        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Volta.png"))); // NOI18N
+        btVoltar.setToolTipText("Voltar");
+        btVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btVoltar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, -1, -1));
+
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Salvar.png"))); // NOI18N
+        btSalvar.setToolTipText("Salvar");
+        btSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btSalvar.setPreferredSize(new java.awt.Dimension(80, 80));
+        getContentPane().add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 470, 760));
+
+        setSize(new java.awt.Dimension(486, 807));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        TelaInicio inicio = new TelaInicio();
+        inicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +341,34 @@ public class TelaCadJogador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btVoltar;
+    private javax.swing.JComboBox<String> cbEscolaridade;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JRadioButton rbAlien;
+    private javax.swing.JRadioButton rbDificil;
+    private javax.swing.JRadioButton rbFacil;
+    private javax.swing.JRadioButton rbGato;
+    private javax.swing.ButtonGroup rbGrupoAvatar;
+    private javax.swing.ButtonGroup rbGrupoNivel;
+    private javax.swing.JRadioButton rbMedio;
+    private javax.swing.JRadioButton rbMonstro;
+    private javax.swing.JRadioButton rbSamurai;
+    private javax.swing.JTextField txtIdade;
+    private javax.swing.JTextField txtNomeJogador;
     // End of variables declaration//GEN-END:variables
 }
