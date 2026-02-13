@@ -290,6 +290,11 @@ public class TelaCadJogador extends javax.swing.JFrame {
         btSalvar.setToolTipText("Salvar");
         btSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSalvar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
@@ -304,6 +309,12 @@ public class TelaCadJogador extends javax.swing.JFrame {
         inicio.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        TelaPerguntas pergunta = new TelaPerguntas();
+        pergunta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btSalvarActionPerformed
 
     /**
      * @param args the command line arguments
