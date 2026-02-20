@@ -39,6 +39,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
         mouse.corMouse(btResposta3, corPadrao, corDestaque);
     }
 
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -5,10 +5,14 @@
  */
 package br.com.duelo_equacoes.telas;
 
+import br.com.duelo_equacoes.dal.ModeloConexao;
 import br.com.duelo_equacoes_classes.font;
 import br.com.duelo_equacoes_classes.mouse;
+import br.com.duelo_equacoes.dal.ModeloConexao;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +23,19 @@ public class TelaCadJogador extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadJogador
      */
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
     font f = new font();
+
+    public static int idJogadorAtual = 0;
+    public static String imgAvatar = "";
+    public static String nomeAvatar = "";
+    public static String nivel = "";
+    public static String nomeJogador = "";
+    public static String idade = "";
+    public static String escolaridade = "";
 
     public TelaCadJogador() {
         initComponents();
@@ -31,6 +47,72 @@ public class TelaCadJogador extends javax.swing.JFrame {
 
         mouse.corMouse(btVoltar, corPadrao, corDestaque);
         mouse.corMouse(btSalvar, corPadrao, corDestaque);
+
+        rbSamurai.setSelected(true);
+        rbFacil.setSelected(true);
+
+        conexao = ModeloConexao.conectar();
+    }
+
+    public void capturaAvatar() {
+        if (rbSamurai.isSelected()) {
+            nomeAvatar = "Samurai";
+            imgAvatar = "/br/com/duelo_equacoes/img/samurai.png";
+        } else if (rbGato.isSelected()) {
+            nomeAvatar = "Gato";
+            imgAvatar = "/br/com/duelo_equacoes/img/Gato.png";
+        } else if (rbAlien.isSelected()) {
+            nomeAvatar = "Alien";
+            imgAvatar = "/br/com/duelo_equacoes/img/Alien.png";
+        } else if (rbMonstro.isSelected()) {
+            nomeAvatar = "Monstro";
+            imgAvatar = "/br/com/duelo_equacoes/img/Monstro.png";
+        }
+    }
+
+    public void capturaNivel() {
+        if (rbFacil.isSelected()) {
+            nivel = "Fácil";
+        } else if (rbMedio.isSelected()) {
+            nivel = "Médio";
+        } else if (rbDificil.isSelected()) {
+            nivel = "Díficil";
+        }
+    }
+
+    public void salvandoJogador() {
+        capturaAvatar();
+        capturaNivel();
+        nomeJogador = txtNomeJogador.getText().trim().toUpperCase();
+        if (nomeJogador.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nome do jogador não informado!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            txtNomeJogador.requestFocus();
+        } else {
+            idade = cbIdade.getSelectedItem().toString();
+            escolaridade = cbEscolaridade.getSelectedItem().toString();
+
+            String sql = "INSERT INTO tbjogador(nomejogador, idade, escolaridade, niveljogo, avatar) VALUES (?, ?, ?, ?, ?)";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, nomeJogador);
+                pst.setString(2, idade);
+                pst.setString(3, escolaridade);
+                pst.setString(4, nivel);
+                pst.setString(5, imgAvatar);
+
+                int adicionado = pst.executeUpdate();
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "JOGADOR CADASTRADO\nBOA SORTE!");
+                    TelaPerguntas perguntas = new TelaPerguntas();
+                    perguntas.setVisible(true);
+                    this.dispose();
+
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERRO: " + e, "ACONTECEU UM ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     /**
@@ -58,9 +140,9 @@ public class TelaCadJogador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtIdade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cbEscolaridade = new javax.swing.JComboBox<>();
+        cbIdade = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         rbFacil = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
@@ -70,6 +152,7 @@ public class TelaCadJogador extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,13 +264,14 @@ public class TelaCadJogador extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel5.setText("Idade:");
 
-        txtIdade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel6.setText("Escolaridade:");
 
         cbEscolaridade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cbEscolaridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fundamental", "Médio", "Tecnico", "Graduado" }));
+
+        cbIdade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cbIdade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,12 +280,12 @@ public class TelaCadJogador extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbEscolaridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbEscolaridade, 0, 160, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -210,9 +294,9 @@ public class TelaCadJogador extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -297,6 +381,14 @@ public class TelaCadJogador extends javax.swing.JFrame {
         });
         getContentPane().add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, -1, -1));
 
+        jButton1.setText("Teste");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 670, -1, -1));
+
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 470, 760));
 
@@ -311,10 +403,12 @@ public class TelaCadJogador extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        TelaPerguntas pergunta = new TelaPerguntas();
-        pergunta.setVisible(true);
-        this.dispose();
+        salvandoJogador();
     }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,6 +449,8 @@ public class TelaCadJogador extends javax.swing.JFrame {
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox<String> cbEscolaridade;
+    private javax.swing.JComboBox<String> cbIdade;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -379,7 +475,6 @@ public class TelaCadJogador extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbMedio;
     private javax.swing.JRadioButton rbMonstro;
     private javax.swing.JRadioButton rbSamurai;
-    private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtNomeJogador;
     // End of variables declaration//GEN-END:variables
 }
