@@ -93,7 +93,7 @@ public class TelaCadJogador extends javax.swing.JFrame {
 
             String sql = "INSERT INTO tbjogador(nomejogador, idade, escolaridade, niveljogo, avatar) VALUES (?, ?, ?, ?, ?)";
             try {
-                pst = conexao.prepareStatement(sql);
+                pst = conexao.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, nomeJogador);
                 pst.setString(2, idade);
                 pst.setString(3, escolaridade);
@@ -103,6 +103,13 @@ public class TelaCadJogador extends javax.swing.JFrame {
                 int adicionado = pst.executeUpdate();
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "JOGADOR CADASTRADO\nBOA SORTE!");
+                    try (java.sql.ResultSet rs = pst.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            idJogadorAtual = rs.getInt(1);
+                            System.out.println("Nº: " + idJogadorAtual);
+                        }
+                    }
+
                     TelaPerguntas perguntas = new TelaPerguntas();
                     perguntas.setVisible(true);
                     this.dispose();
