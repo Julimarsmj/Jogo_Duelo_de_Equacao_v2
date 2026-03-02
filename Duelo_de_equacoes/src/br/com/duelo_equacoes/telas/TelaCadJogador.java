@@ -110,10 +110,15 @@ public class TelaCadJogador extends javax.swing.JFrame {
                         }
                     }
 
-                    TelaPerguntas perguntas = new TelaPerguntas();
-                    perguntas.setVisible(true);
-                    this.dispose();
-
+                    if (nivel.equals("Fácil") || nivel.equals("Médio")) {
+                        TelaPerguntas perguntas = new TelaPerguntas();
+                        perguntas.setVisible(true);
+                        this.dispose();
+                    } else {
+                        TelaPerguntas2 perguntas2 = new TelaPerguntas2();
+                        perguntas2.setVisible(true);
+                        this.dispose();
+                    }
                 }
 
             } catch (Exception e) {
@@ -159,7 +164,6 @@ public class TelaCadJogador extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -388,14 +392,6 @@ public class TelaCadJogador extends javax.swing.JFrame {
         });
         getContentPane().add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, -1, -1));
 
-        jButton1.setText("Teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 670, -1, -1));
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 470, 760));
 
@@ -412,10 +408,6 @@ public class TelaCadJogador extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         salvandoJogador();
     }//GEN-LAST:event_btSalvarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,7 +449,6 @@ public class TelaCadJogador extends javax.swing.JFrame {
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox<String> cbEscolaridade;
     private javax.swing.JComboBox<String> cbIdade;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

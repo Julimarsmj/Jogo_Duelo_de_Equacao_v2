@@ -40,7 +40,6 @@ public class TelaPerguntas extends javax.swing.JFrame {
         initComponents();
         Font fontePersonalizada = f.carregarFonte(40f);
         Font fontePersonalizada2 = f.carregarFonte(60f);
-        Font fontePersonalizada3 = f.carregarFonte(30f);
 
         lblN1.setFont(fontePersonalizada2);
         lblN2.setFont(fontePersonalizada2);
@@ -272,6 +271,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
         TelaInicio inicio = new TelaInicio();
         inicio.setVisible(true);
         this.dispose();
+        cronometro.stop();
     }
 
     public void salvar() {
