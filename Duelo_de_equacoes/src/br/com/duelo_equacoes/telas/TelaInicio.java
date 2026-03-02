@@ -16,37 +16,33 @@ import java.awt.Color;
  */
 public class TelaInicio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaInicio
-     */
-    
-    
+    // ==========================================================
+    // CONSTRUTORES
+    // ==========================================================
     font f = new font();
     TelaPlacar placar = new TelaPlacar();
-    TelaCadJogador  jogador = new TelaCadJogador();
+    TelaCadJogador jogador = new TelaCadJogador();
     TelaRegras regras = new TelaRegras();
-    
+    javax.swing.Timer cronometro;
+
+    // ==========================================================
+    // CONSTRUTOR: PREPARAÇÃO DA TELA
+    // Inicia os componentes, aplica o design visual e dá o "play" no jogo.
+    // ==========================================================
     public TelaInicio() {
         initComponents();
-        //Caminho começando do pacote src
-        //Path starting from the src package
         Font fontePersonalizada = f.carregarFonte(30f);
-        
         btJogar.setFont(fontePersonalizada);
         btPlacar.setFont(fontePersonalizada);
         btRegras.setFont(fontePersonalizada);
-        
-        Color corPadrao = new Color (0, 96, 57);
-        Color corDestaque = new Color (166, 137, 83);
-        
+        Color corPadrao = new Color(0, 96, 57);
+        Color corDestaque = new Color(166, 137, 83);
         mouse.corMouse(btJogar, corPadrao, corDestaque);
         mouse.corMouse(btPlacar, corPadrao, corDestaque);
         mouse.corMouse(btRegras, corPadrao, corDestaque);
         mouse.corMouse(btSom, corPadrao, corDestaque);
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

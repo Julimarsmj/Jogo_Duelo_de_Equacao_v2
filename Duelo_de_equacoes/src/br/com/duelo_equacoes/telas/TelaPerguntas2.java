@@ -21,91 +21,98 @@ import javax.swing.JOptionPane;
  */
 public class TelaPerguntas2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPerguntas2
-     */
+    // ==========================================================
+    // VARIÁVEIS GLOBAIS
+    // ==========================================================
     int n1 = 0, n2 = 0, operacao = 0, pontos = 0, alternativas = 0;
     float resultado = 0, repostaJogador = 0;
     int tempoRestante = 5;
-
     String respostaCertaGlobal = "";
-
     javax.swing.Timer cronometro;
     font f = new font();
     Random rand = new Random();
 
+    // ==========================================================
+    // CONSTRUTOR: PREPARAÇÃO DA TELA
+    // Inicia os componentes, aplica o design visual e dá o "play" no jogo.
+    // ==========================================================
     public TelaPerguntas2() {
         initComponents();
-
         Font fontePersonalizada = f.carregarFonte(40f);
         Font fontePersonalizada2 = f.carregarFonte(60f);
-
         btAlternativa1.setFont(fontePersonalizada);
         btAlternativa2.setFont(fontePersonalizada);
         lblExp1.setFont(fontePersonalizada2);
         lblExp2.setFont(fontePersonalizada2);
         lblSinal.setFont(fontePersonalizada2);
         lblcont.setFont(fontePersonalizada2);
-
         Color corPadrao = new Color(0, 96, 57);
         Color corDestaque = new Color(166, 137, 83);
-
         mouse.corMouse(btAlternativa1, corPadrao, corDestaque);
         mouse.corMouse(btAlternativa2, corPadrao, corDestaque);
-
         posicaoAlternativa();
         iniciarCronometro();
     }
 
+    // ==========================================================
+    // SORTEIO DE NÚMEROS
+    // Define a base (n1) e o expoente (n2) de 1 a 8 e mostra na tela.
+    // ==========================================================
     public void aleatorio_numeros() {
         alternativas = rand.nextInt(1) + 1;
-
         n1 = rand.nextInt(8) + 1;
         n2 = rand.nextInt(8) + 1;
-
         lblExp1.setText(String.valueOf(n1));
         lblExp2.setText(String.valueOf(n2));
     }
 
+    // ==========================================================
+    // CALCULADORA DO JOGO
+    // Faz a conta real de potenciação (n1 elevado a n2) e formata o texto.
+    // ==========================================================
     public String respostaCorreta() {
         aleatorio_numeros();
-
         resultado = (float) Math.pow(n1, n2);
-
         // Mantém a sua excelente lógica de formatação visual!
         if (resultado == (int) resultado) {
             return String.valueOf((int) resultado);
         } else {
             return String.valueOf(resultado).replace(".", ",");
         }
-
     }
 
+    // ==========================================================
+    // GERENCIADOR DO TEMPO (5 SEGUNDOS)
+    // Se chegar a zero, para o relógio sozinho e chama o Game Over.
+    // ==========================================================
     public void iniciarCronometro() {
+        tempoRestante = 5;
+        lblcont.setText(String.valueOf(tempoRestante));
+        // Cria o relógio na memória UMA ÚNICA VEZ
+        if (cronometro == null) {
+            cronometro = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    tempoRestante--;
+                    lblcont.setText(String.valueOf(tempoRestante));
+                    if (tempoRestante <= 0) {
+                        // Para o relógio com segurança e chama o Game Over
+                        cronometro.stop();
+                        gameOver("O TEMPO ACABOU, VOCÊ DEMOROU MUITO!");
+                    }
+                }
+            });
+        }
 
-    if (cronometro != null) {
-        cronometro.stop();
+        // A MÁGICA: Em vez de .start(), usamos o .restart()
+        // Isso desliga qualquer contagem antiga e inicia do 5 perfeitamente!
+        cronometro.restart();
     }
 
-    tempoRestante = 5; 
-    
-    lblcont.setText(String.valueOf(tempoRestante));
-
-    cronometro = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            tempoRestante--;
-            lblcont.setText(String.valueOf(tempoRestante));
-
-            if (tempoRestante <= 0) {
-                ((javax.swing.Timer) e.getSource()).stop(); 
-                gameOver("O TEMPO ACABOU, VOCÊ DEMOROU MUITO!");
-            }
-        }
-    });
-    cronometro.start();
-}
-
+    // ==========================================================
+    // FIM DE JOGO
+    // Trava tudo, exibe os pontos, salva no banco e volta ao menu principal.
+    // ==========================================================
     public void gameOver(String motivoDerrota) {
         if (cronometro != null) {
             cronometro.stop();
@@ -115,9 +122,12 @@ public class TelaPerguntas2 extends javax.swing.JFrame {
         TelaInicio inicio = new TelaInicio();
         inicio.setVisible(true);
         this.dispose();
-        cronometro.stop();
     }
-    
+
+    // ==========================================================
+    // BANCO DE DADOS
+    // Guarda a pontuação atual do jogador na tabela de forma segura.
+    // ==========================================================
     public void salvar() {
         String sql = "UPDATE tbjogador SET pontos = ? WHERE id = ?";
         if (TelaCadJogador.idJogadorAtual == 0) {
@@ -138,61 +148,71 @@ public class TelaPerguntas2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
+    // ==========================================================
+    // JUIZ DA PARTIDA (BOTÕES)
+    // Verifica se o botão clicado tem o texto igual à resposta certa.
+    // ==========================================================
     public void checaAcerto(String textoBotao) {
         if (textoBotao.equals(respostaCertaGlobal)) {
             JOptionPane.showMessageDialog(this, "Acertou");
             pontos += 1;
             lblPontos.setText(String.valueOf(pontos));
-
         } else {
             gameOver("VOCê ESCOLHEU A RESPOSTA ERRADA! A CERT ERA:" + respostaCertaGlobal);
-
         }
-
         iniciarCronometro();
         posicaoAlternativa();
     }
 
+    // ==========================================================
+    // O MAESTRO DA RODADA
+    // Chama a conta nova, gera a alternativa falsa e embaralha os 2 botões.
+    // ==========================================================
     public void posicaoAlternativa() {
-    aleatorio_numeros();
-    
-    String respostaFormatada = respostaCorreta();
-    respostaCertaGlobal = respostaFormatada;
+        aleatorio_numeros();
+        String respostaFormatada = respostaCorreta();
+        respostaCertaGlobal = respostaFormatada;
+        float erro1 = 0f;
+        erro1 = (float) Math.pow(n1, n2) + 10;
+        if (erro1 == resultado) {
+            erro1 = resultado + n1;
+        }
+        String textoErro1;
+        if (erro1 == (int) erro1) {
+            textoErro1 = String.valueOf((int) erro1);
+        } else {
+            textoErro1 = String.valueOf(erro1).replace(".", ",");
+        }
+        java.util.Random rand = new java.util.Random();
+        alternativas = rand.nextInt(2) + 1;
+        switch (alternativas) {
+            case 1:
+                btAlternativa1.setText(respostaFormatada);
+                btAlternativa2.setText(textoErro1);
+                break;
 
-    float erro1 = 0f;
-
-
-    erro1 = (float) Math.pow(n1, n2) + 10;
-
-    if (erro1 == resultado) {
-        erro1 = resultado + n1; 
+            case 2:
+                // Resposta certa no Botão 2
+                btAlternativa1.setText(textoErro1);
+                btAlternativa2.setText(respostaFormatada);
+                break;
+        }
     }
 
-    String textoErro1;
-    if (erro1 == (int) erro1) {
-        textoErro1 = String.valueOf((int) erro1);
-    } else {
-        textoErro1 = String.valueOf(erro1).replace(".", ",");
+    // ==========================================================
+    // DESTRUIÇÃO SEGURA DA TELA
+    // ==========================================================
+    @Override
+    public void dispose() {
+        // Trava de segurança máxima: se a tela morrer, o relógio morre junto!
+        if (cronometro != null) {
+            cronometro.stop();
+            cronometro = null;
+        }
+        super.dispose(); // Executa o fechamento padrão do Java
     }
 
-    java.util.Random rand = new java.util.Random();
-    alternativas = rand.nextInt(2) + 1;
-
-    switch (alternativas) {
-        case 1:
-            btAlternativa1.setText(respostaFormatada);
-            btAlternativa2.setText(textoErro1);
-            break;
-            
-        case 2:
-            // Resposta certa no Botão 2
-            btAlternativa1.setText(textoErro1);
-            btAlternativa2.setText(respostaFormatada);
-            break;
-    }
-}
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

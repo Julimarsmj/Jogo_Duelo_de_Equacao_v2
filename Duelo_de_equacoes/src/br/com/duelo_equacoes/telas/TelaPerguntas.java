@@ -22,46 +22,43 @@ import javax.swing.JOptionPane;
  */
 public class TelaPerguntas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPerguntas
-     */
+    // ==========================================================
+    // VARIÁVEIS GLOBAIS
+    // ==========================================================
     font f = new font();
     Random rand = new Random();
-
     int n1 = 0, n2 = 0, operacao = 0, pontos = 0, alternativas = 0;
     float resultado = 0, repostaJogador = 0;
     int variacaoDezena = 0, variacaoUnidade = 0;
     int tempoRestante = 0;
-
     String respostaCertaGlobal = "";
     javax.swing.Timer cronometro;
 
+    // Construtor: Prepara o visual da tela ao abrir (fontes, cores e efeitos) 
+    // e dá o pontapé inicial sorteando a primeira conta e ligando o relógio.
     public TelaPerguntas() {
         initComponents();
         Font fontePersonalizada = f.carregarFonte(40f);
         Font fontePersonalizada2 = f.carregarFonte(60f);
-
         lblN1.setFont(fontePersonalizada2);
         lblN2.setFont(fontePersonalizada2);
         lblSinal.setFont(fontePersonalizada2);
         lblInterrogacao.setFont(fontePersonalizada2);
         lblcont.setFont(fontePersonalizada2);
-
         btResposta1.setFont(fontePersonalizada);
         btResposta2.setFont(fontePersonalizada);
         btResposta3.setFont(fontePersonalizada);
-
         Color corPadrao = new Color(0, 96, 57);
         Color corDestaque = new Color(166, 137, 83);
-
         mouse.corMouse(btResposta1, corPadrao, corDestaque);
         mouse.corMouse(btResposta2, corPadrao, corDestaque);
         mouse.corMouse(btResposta3, corPadrao, corDestaque);
-
         posicaoAlternativa();
         iniciarCronometro();
     }
 
+    // Sorteia a operação matemática e os números da conta, 
+    // respeitando os limites do nível de dificuldade (Fácil ou Médio).
     public void aleatorio_numeros() {
         operacao = rand.nextInt(4) + 1;
         alternativas = rand.nextInt(3) + 1;
@@ -76,6 +73,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
         lblN2.setText(String.valueOf(n2));
     }
 
+    // Atualiza os textos na tela para mostrar a conta visualmente para o jogador,
+    // colocando o sinal correto (+, -, x ou /) dependendo do sorteio.
     public void apresentacaoOperacao() {
         aleatorio_numeros();
         if (nivel.equals("Fácil") || nivel.equals("Médio")) {
@@ -100,6 +99,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
 
     }
 
+    // Resolve a conta matematicamente para descobrir o resultado real
+    // e formata o texto para ficar bonito (tira o .0 ou põe vírgula no lugar do ponto).
     public String respostaCorreta() {
         switch (operacao) {
             case 1:
@@ -119,7 +120,6 @@ public class TelaPerguntas extends javax.swing.JFrame {
                 resultado = 0.00f;
                 break;
         }
-
         if (resultado == (int) resultado) {
             return String.valueOf((int) resultado);
         } else {
@@ -127,17 +127,16 @@ public class TelaPerguntas extends javax.swing.JFrame {
         }
     }
 
+    // O "Maestro" da rodada: Junta todos os métodos de gerar contas, cria duas
+    // alternativas com erros matemáticos inteligentes e embaralha as posições dos botões.
     public void posicaoAlternativa() {
         aleatorio_numeros();
         apresentacaoOperacao();
         respostaCorreta();
-
         String respostaFormatada = respostaCorreta();
         respostaCertaGlobal = respostaFormatada;
-
         float erro1 = 0f;
         float erro2 = 0f;
-
         switch (operacao) {
             case 1:
                 variacaoDezena = rand.nextBoolean() ? 10 : -10;
@@ -168,34 +167,28 @@ public class TelaPerguntas extends javax.swing.JFrame {
                 float erroDiv2 = (rand.nextInt(5) + 1) / 10.0f;
                 erro1 = resultado + (rand.nextBoolean() ? erroDiv1 : -erroDiv1);
                 erro2 = resultado + (rand.nextBoolean() ? erroDiv2 : -erroDiv2);
-
                 erro1 = Math.round(erro1 * 10) / 10.0f;
                 erro2 = Math.round(erro2 * 10) / 10.0f;
                 break;
         }
-
         if (erro1 == resultado) {
             erro1 += 2;
         }
         if (erro2 == resultado || erro2 == erro1) {
             erro2 -= 2;
         }
-
         String textoErro1;
         String textoErro2;
-
         if (erro1 == (int) erro1) {
             textoErro1 = String.valueOf((int) erro1);
         } else {
             textoErro1 = String.valueOf(erro1).replace(".", ",");
         }
-
         if (erro2 == (int) erro2) {
             textoErro2 = String.valueOf((int) erro2);
         } else {
             textoErro2 = String.valueOf(erro2).replace(".", ",");
         }
-
         switch (alternativas) {
             case 1:
                 btResposta1.setText(respostaFormatada);
@@ -215,6 +208,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
         }
     }
 
+    // Verifica se o texto do botão clicado é igual à resposta certa.
+    // Se for, soma ponto e avança a rodada. Se não for, decreta o Game Over.
     public void checaAcerto(String textoBotao) {
         if (textoBotao.equals(respostaCertaGlobal)) {
             JOptionPane.showMessageDialog(this, "Acertou");
@@ -230,38 +225,34 @@ public class TelaPerguntas extends javax.swing.JFrame {
         iniciarCronometro();
     }
 
+    // Cria e controla o relógio da rodada (15s no Fácil, 10s nos outros níveis).
+    // Se o tempo esgotar, para o relógio sozinho e chama o Game Over.
     public void iniciarCronometro() {
-        if (cronometro != null) {
-            cronometro.stop();
-        }
-
         if (nivel.equals("Fácil")) {
             tempoRestante = 15;
-            javax.swing.Timer cronometro;
         } else {
             tempoRestante = 10;
-            javax.swing.Timer cronometro;
         }
-
         lblcont.setText(String.valueOf(tempoRestante));
+        if (cronometro == null) {
+            cronometro = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    tempoRestante--;
+                    lblcont.setText(String.valueOf(tempoRestante));
 
-        cronometro = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                tempoRestante--;
-                lblcont.setText(String.valueOf(tempoRestante));
-
-                if (tempoRestante <= 0) {
-                    cronometro.stop();
-                    gameOver("O TEMPO ACABOU, VOCÊ DEMOROU MUITO!");
-                    posicaoAlternativa();
-                    iniciarCronometro();
+                    if (tempoRestante <= 0) {
+                        cronometro.stop();
+                        gameOver("O TEMPO ACABOU, VOCÊ DEMOROU MUITO!");
+                    }
                 }
-            }
-        });
-        cronometro.start();
+            });
+        }
+        cronometro.restart();
     }
 
+    // Finaliza a partida com segurança: garante que o relógio parou, avisa o 
+    // motivo da derrota, chama o salvamento no banco de dados e volta ao Menu Inicial.
     public void gameOver(String motivoDerrota) {
         if (cronometro != null) {
             cronometro.stop();
@@ -271,9 +262,10 @@ public class TelaPerguntas extends javax.swing.JFrame {
         TelaInicio inicio = new TelaInicio();
         inicio.setVisible(true);
         this.dispose();
-        cronometro.stop();
     }
 
+    // Conecta de forma segura com o banco de dados e atualiza a pontuação
+    // do jogador atual baseado no ID que foi gerado na tela de cadastro.
     public void salvar() {
         String sql = "UPDATE tbjogador SET pontos = ? WHERE id = ?";
         if (TelaCadJogador.idJogadorAtual == 0) {
@@ -293,6 +285,15 @@ public class TelaPerguntas extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    @Override
+    public void dispose() {
+        if (cronometro != null) {
+            cronometro.stop();
+            cronometro = null;
+        }
+        super.dispose();
     }
 
     /**
@@ -319,7 +320,6 @@ public class TelaPerguntas extends javax.swing.JFrame {
         lblcont = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
