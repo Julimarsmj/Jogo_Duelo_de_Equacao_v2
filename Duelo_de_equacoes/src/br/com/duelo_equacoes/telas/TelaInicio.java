@@ -5,6 +5,7 @@
  */
 package br.com.duelo_equacoes.telas;
 
+import br.com.duelo_equacoes_classes.ControleMusica;
 import java.awt.Font;
 import br.com.duelo_equacoes_classes.font;
 import br.com.duelo_equacoes_classes.mouse;
@@ -41,8 +42,13 @@ public class TelaInicio extends javax.swing.JFrame {
         mouse.corMouse(btPlacar, corPadrao, corDestaque);
         mouse.corMouse(btRegras, corPadrao, corDestaque);
         mouse.corMouse(btSom, corPadrao, corDestaque);
+        
+        musicaFundo.carregarMusica("/br/com/duelo_equacoes/musicas/tema_principal.wav");
+        musicaFundo.tocar();
     }
 
+    ControleMusica musicaFundo = new ControleMusica();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,6 +114,11 @@ public class TelaInicio extends javax.swing.JFrame {
         btSom.setToolTipText("Som");
         btSom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSom.setPreferredSize(new java.awt.Dimension(60, 60));
+        btSom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSomActionPerformed(evt);
+            }
+        });
         getContentPane().add(btSom, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 648, -1, 64));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
@@ -131,6 +142,10 @@ public class TelaInicio extends javax.swing.JFrame {
         regras.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btRegrasActionPerformed
+
+    private void btSomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSomActionPerformed
+        musicaFundo.alternarMusica();
+    }//GEN-LAST:event_btSomActionPerformed
 
     /**
      * @param args the command line arguments

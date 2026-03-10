@@ -5,6 +5,7 @@
  */
 package br.com.duelo_equacoes.telas;
 
+import br.com.duelo_equacoes.dal.ModeloConexao;
 import br.com.duelo_equacoes_classes.font;
 import br.com.duelo_equacoes_classes.mouse;
 import java.awt.Color;
@@ -30,8 +31,68 @@ public class TelaPlacar extends javax.swing.JFrame {
 
         Color corPadrao = new Color(0, 96, 57);
         Color corDestaque = new Color(166, 137, 83);
-        
+
         mouse.corMouse(btVoltar, corPadrao, corDestaque);
+
+        preencherPlacar(tbFacil, "Fácil");
+        preencherPlacar(tbMedio, "Médio");
+        preencherPlacar(tbDificil, "Difícil");
+    }
+
+    public void preencherPlacar(javax.swing.JTable tabela, String nivel) {
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
+                new Object[]{"Avatar", "Nome", "Idade", "Pontos"}, 0
+        ) {
+            @Override
+            public Class<?> getColumnClass(int coluna) {
+                if (coluna == 0) {
+                    return javax.swing.ImageIcon.class;
+                }
+                return Object.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        String sql = "SELECT avatar, nomejogador, pontos, idade FROM tbjogador WHERE niveljogo = ? ORDER BY pontos";
+
+        try (java.sql.Connection conexao = ModeloConexao.conectar();
+                java.sql.PreparedStatement pst = conexao.prepareStatement(sql)) {
+
+            pst.setString(1, nivel);
+
+            try (java.sql.ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    String caminhoImagem = rs.getString("avatar");
+                    javax.swing.ImageIcon iconeRedimensionado = null;
+
+                    java.net.URL imgUrl = getClass().getResource(caminhoImagem);
+
+                    if (imgUrl != null) {
+                        javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon(imgUrl);
+                        java.awt.Image img = iconeOriginal.getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+                        iconeRedimensionado = new javax.swing.ImageIcon(img);
+                    } else {
+                        System.out.println("FALHA: Imagem não encontrada no caminho: " + caminhoImagem);
+                    }
+                    modelo.addRow(new Object[]{
+                        iconeRedimensionado,
+                        rs.getString("nomejogador"),
+                        rs.getString("idade"), 
+                        rs.getInt("pontos") 
+                    });
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar o placar: " + e);
+        }
+
+        tabela.setModel(modelo);
+        tabela.setRowHeight(50);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
     }
 
     /**
@@ -69,6 +130,9 @@ public class TelaPlacar extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Placar.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 32, -1, -1));
 
+        jTabbedPane1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        tbFacil.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tbFacil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -88,19 +152,20 @@ public class TelaPlacar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nível Facíl", jPanel1);
 
+        tbMedio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tbMedio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -127,12 +192,13 @@ public class TelaPlacar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nível Médio", jPanel2);
 
+        tbDificil.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tbDificil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -159,13 +225,13 @@ public class TelaPlacar extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nível Díficil", jPanel3);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 131, 464, 437));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 131, -1, 490));
 
         btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Volta.png"))); // NOI18N
         btVoltar.setToolTipText("Voltar");
@@ -176,7 +242,7 @@ public class TelaPlacar extends javax.swing.JFrame {
                 btVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(btVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 622, -1, -1));
+        getContentPane().add(btVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/duelo_equacoes/img/Bg.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 490, 740));
